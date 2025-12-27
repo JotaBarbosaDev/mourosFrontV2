@@ -9,12 +9,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
 type MemberDetails = {
   id?: string;
   name?: string;
+  avatar?: string;
   email?: string;
   nSocio?: string;
   type?: string;
@@ -45,6 +46,13 @@ export function MemberDetailsDialogTrigger({
   const statusText =
     member?.status === "active" ? "Ativo" : member?.status === "inactive" ? "Inativo" : "";
   const quotas = Object.entries(member?.quotaPaid ?? {});
+  const nameParts = member?.name?.split(" ").filter(part => part.length > 0) ?? [];
+  const initials =
+    nameParts.length > 1
+      ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
+      : nameParts.length === 1
+      ? nameParts[0][0].toUpperCase()
+      : "??";
 
   return (
     <Dialog>
@@ -52,71 +60,156 @@ export function MemberDetailsDialogTrigger({
       <DialogContent className="sm:max-w-170">
         <DialogHeader>
           <DialogTitle>Detalhes do Sócio</DialogTitle>
-          <DialogDescription>Informações do membro selecionado.</DialogDescription>
+          <DialogDescription>
+            Informações do membro selecionado.
+          </DialogDescription>
         </DialogHeader>
+
+        <div className="flex justify-center mb-4">
+          <Avatar className="h-24 w-24">
+            {member?.avatar ? (
+              <AvatarImage src={member.avatar} alt={member?.name} />
+            ) : null}
+            <AvatarFallback className="text-2xl font-bold">
+              {initials}
+            </AvatarFallback>
+          </Avatar>
+        </div>
 
         <div className="grid gap-6">
           {/* Identificação */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="name">Nome</Label>
-              <Input id="name" readOnly value={member?.name ?? ""} />
+              <Label
+                htmlFor="name"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Nome
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">
+                {member?.name ?? "-"}
+              </p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="nSocio">Nº Sócio</Label>
-              <Input id="nSocio" readOnly value={member?.nSocio ?? ""} />
+              <Label
+                htmlFor="nSocio"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Nº Sócio
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">
+                {member?.nSocio ?? "-"}
+              </p>
             </div>
           </div>
 
           {/* Contactos */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" readOnly value={member?.email ?? ""} />
+              <Label
+                htmlFor="email"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Email
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">
+                {member?.email ?? "-"}
+              </p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="phone">Telefone</Label>
-              <Input id="phone" readOnly value={member?.phone ?? ""} />
+              <Label
+                htmlFor="phone"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Telefone
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">
+                {member?.phone ?? "-"}
+              </p>
             </div>
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="morada">Morada</Label>
-            <Input id="morada" readOnly value={member?.morada ?? ""} />
+            <Label
+              htmlFor="morada"
+              className="text-xs font-semibold text-muted-foreground"
+            >
+              Morada
+            </Label>
+            <p className="text-sm border rounded px-3 py-2">
+              {member?.morada ?? "-"}
+            </p>
           </div>
 
           {/* Estado */}
           <div className="grid md:grid-cols-3 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="type">Tipo</Label>
-              <Input id="type" readOnly value={member?.type ?? ""} />
+              <Label
+                htmlFor="type"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Tipo
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">
+                {member?.type ?? "-"}
+              </p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="status">Status</Label>
-              <Input id="status" readOnly value={statusText} />
+              <Label
+                htmlFor="status"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Status
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">
+                {statusText || "-"}
+              </p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="whatsapp">Whatsapp</Label>
-              <Input id="whatsapp" readOnly value={whatsappText} />
+              <Label
+                htmlFor="whatsapp"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Whatsapp
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">{whatsappText}</p>
             </div>
           </div>
 
           {/* Financeiro */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="joia">Jóia paga</Label>
-              <Input id="joia" readOnly value={joiaText} />
+              <Label
+                htmlFor="joia"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Jóia paga
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">{joiaText}</p>
             </div>
             <div className="grid gap-2">
-              <Label>Quotas</Label>
+              <Label className="text-xs font-semibold text-muted-foreground">
+                Quotas
+              </Label>
               <div className="grid grid-cols-2 gap-2">
                 {quotas.length === 0 ? (
-                  <span className="text-muted-foreground">Sem registos</span>
+                  <span className="text-muted-foreground text-sm">
+                    Sem registos
+                  </span>
                 ) : (
                   quotas.map(([year, paid]) => (
-                    <div key={year} className="flex items-center justify-between rounded border px-3 py-1">
-                      <span className="font-medium">{year}</span>
-                      <span className={paid ? "text-green-600" : "text-red-600"}>
+                    <div
+                      key={year}
+                      className="flex items-center justify-between rounded border px-3 py-1"
+                    >
+                      <span className="font-medium text-sm">{year}</span>
+                      <span
+                        className={
+                          paid
+                            ? "text-green-600 text-sm"
+                            : "text-red-600 text-sm"
+                        }
+                      >
                         {paid ? "Pago" : "Em falta"}
                       </span>
                     </div>
@@ -129,12 +222,26 @@ export function MemberDetailsDialogTrigger({
           {/* Datas */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="birthdate">Data de nascimento</Label>
-              <Input id="birthdate" readOnly value={formatDate(member?.birthdate)} />
+              <Label
+                htmlFor="birthdate"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Data de nascimento
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">
+                {formatDate(member?.birthdate) || "-"}
+              </p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="memberSince">Sócio desde</Label>
-              <Input id="memberSince" readOnly value={formatDate(member?.memberSince)} />
+              <Label
+                htmlFor="memberSince"
+                className="text-xs font-semibold text-muted-foreground"
+              >
+                Sócio desde
+              </Label>
+              <p className="text-sm border rounded px-3 py-2">
+                {formatDate(member?.memberSince) || "-"}
+              </p>
             </div>
           </div>
         </div>
@@ -164,10 +271,17 @@ export function MemberDetailsDialog({
     return isNaN(d.getTime()) ? "" : d.toLocaleDateString("pt-PT");
   };
   const whatsappText = member?.Whatsapp ? "Sim" : "Não";
-  const joiaText = member?.joiaPaid ? "Sim" : "Não";
+  const joiaText = member?.joiaPaid ? "Pago" : "Não";
   const statusText =
     member?.status === "active" ? "Ativo" : member?.status === "inactive" ? "Inativo" : "";
   const quotas = Object.entries(member?.quotaPaid ?? {});
+  const nameParts = member?.name?.split(" ").filter((p) => p.length > 0) ?? [];
+  const initials =
+    nameParts.length > 1
+      ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
+      : nameParts.length === 1
+      ? nameParts[0][0].toUpperCase()
+      : "??";
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -177,64 +291,73 @@ export function MemberDetailsDialog({
           <DialogDescription>Informações do membro selecionado.</DialogDescription>
         </DialogHeader>
 
+        <div className="flex justify-center mb-4">
+          <Avatar className="h-24 w-24">
+            {member?.avatar ? (
+              <AvatarImage src={member.avatar} alt={member?.name} />
+            ) : null}
+            <AvatarFallback className="text-2xl font-bold">{initials}</AvatarFallback>
+          </Avatar>
+        </div>
+
         <div className="grid gap-6">
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="name">Nome</Label>
-              <Input id="name" readOnly value={member?.name ?? ""} />
+              <Label htmlFor="name" className="text-xs font-semibold text-muted-foreground">Nome</Label>
+              <p className="text-sm border rounded px-3 py-2">{member?.name ?? "-"}</p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="nSocio">Nº Sócio</Label>
-              <Input id="nSocio" readOnly value={member?.nSocio ?? ""} />
+              <Label htmlFor="nSocio" className="text-xs font-semibold text-muted-foreground">Nº Sócio</Label>
+              <p className="text-sm border rounded px-3 py-2">{member?.nSocio ?? "-"}</p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" readOnly value={member?.email ?? ""} />
+              <Label htmlFor="email" className="text-xs font-semibold text-muted-foreground">Email</Label>
+              <p className="text-sm border rounded px-3 py-2">{member?.email ?? "-"}</p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="phone">Telefone</Label>
-              <Input id="phone" readOnly value={member?.phone ?? ""} />
+              <Label htmlFor="phone" className="text-xs font-semibold text-muted-foreground">Telefone</Label>
+              <p className="text-sm border rounded px-3 py-2">{member?.phone ?? "-"}</p>
             </div>
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="morada">Morada</Label>
-            <Input id="morada" readOnly value={member?.morada ?? ""} />
+            <Label htmlFor="morada" className="text-xs font-semibold text-muted-foreground">Morada</Label>
+            <p className="text-sm border rounded px-3 py-2">{member?.morada ?? "-"}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="type">Tipo</Label>
-              <Input id="type" readOnly value={member?.type ?? ""} />
+              <Label htmlFor="type" className="text-xs font-semibold text-muted-foreground">Tipo</Label>
+              <p className="text-sm border rounded px-3 py-2">{member?.type ?? "-"}</p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="status">Status</Label>
-              <Input id="status" readOnly value={statusText} />
+              <Label htmlFor="status" className="text-xs font-semibold text-muted-foreground">Status</Label>
+              <p className="text-sm border rounded px-3 py-2">{statusText || "-"}</p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="whatsapp">Whatsapp</Label>
-              <Input id="whatsapp" readOnly value={whatsappText} />
+              <Label htmlFor="whatsapp" className="text-xs font-semibold text-muted-foreground">Whatsapp</Label>
+              <p className="text-sm border rounded px-3 py-2">{whatsappText}</p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="joia">Jóia paga</Label>
-              <Input id="joia" readOnly value={joiaText} />
+              <Label htmlFor="joia" className="text-xs font-semibold text-muted-foreground">Jóia paga</Label>
+              <p className="text-sm border rounded px-3 py-2">{joiaText}</p>
             </div>
             <div className="grid gap-2">
-              <Label>Quotas</Label>
+              <Label className="text-xs font-semibold text-muted-foreground">Quotas</Label>
               <div className="grid grid-cols-2 gap-2">
                 {quotas.length === 0 ? (
-                  <span className="text-muted-foreground">Sem registos</span>
+                  <span className="text-muted-foreground text-sm">Sem registos</span>
                 ) : (
                   quotas.map(([year, paid]) => (
                     <div key={year} className="flex items-center justify-between rounded border px-3 py-1">
-                      <span className="font-medium">{year}</span>
-                      <span className={paid ? "text-green-600" : "text-red-600"}>
+                      <span className="font-medium text-sm">{year}</span>
+                      <span className={paid ? "text-green-600 text-sm" : "text-red-600 text-sm"}>
                         {paid ? "Pago" : "Em falta"}
                       </span>
                     </div>
@@ -246,12 +369,12 @@ export function MemberDetailsDialog({
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="birthdate">Data de nascimento</Label>
-              <Input id="birthdate" readOnly value={formatDate(member?.birthdate)} />
+              <Label htmlFor="birthdate" className="text-xs font-semibold text-muted-foreground">Data de nascimento</Label>
+              <p className="text-sm">{formatDate(member?.birthdate) || "-"}</p>
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="memberSince">Sócio desde</Label>
-              <Input id="memberSince" readOnly value={formatDate(member?.memberSince)} />
+              <Label htmlFor="memberSince" className="text-xs font-semibold text-muted-foreground">Sócio desde</Label>
+              <p className="text-sm">{formatDate(member?.memberSince) || "-"}</p>
             </div>
           </div>
         </div>

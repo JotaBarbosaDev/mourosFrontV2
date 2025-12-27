@@ -50,10 +50,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { MemberDetailsDialog } from "@/components/modals/memberDetails";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export type Socio = {
   id: string
   name: string
+  avatar: string
   email: string
   nSocio: string
   type: string
@@ -71,6 +73,7 @@ const data: Socio[] = [
   {
     id: "m5gr84i9",
     name: "Joaquim Barbosa",
+    avatar: " ",
     nSocio: "001",
     type: "Socio",
     phone: "912345678",
@@ -79,13 +82,14 @@ const data: Socio[] = [
     status: "active",
     email: "joaquim@example.com",
     joiaPaid: true,
-    quotaPaid: { "2023": true, "2024": false },
+    quotaPaid: {"2023": true, "2024": false},
     birthdate: new Date("1980-05-15"),
     memberSince: new Date("2010-06-20"),
   },
   {
     id: "3u1reuv4",
     name: "Abe45",
+    avatar: " ",
     nSocio: "002",
     type: "Socio",
     phone: "923456789",
@@ -94,13 +98,14 @@ const data: Socio[] = [
     status: "active",
     email: "Abe45@example.com",
     joiaPaid: true,
-    quotaPaid: { "2023": true, "2024": true },
+    quotaPaid: {"2023": true, "2024": true},
     birthdate: new Date("1975-09-30"),
     memberSince: new Date("2012-03-15"),
   },
   {
     id: "derv1ws0",
     name: "Monserrat44",
+    avatar: " ",
     nSocio: "003",
     type: "Socio",
     phone: "934567890",
@@ -109,13 +114,14 @@ const data: Socio[] = [
     status: "inactive",
     email: "Monserrat44@example.com",
     joiaPaid: false,
-    quotaPaid: { "2023": false, "2024": false },
+    quotaPaid: {"2023": false, "2024": false},
     birthdate: new Date("1990-12-10"),
     memberSince: new Date("2015-11-05"),
   },
   {
     id: "5kma53ae",
     name: "Silas22",
+    avatar: "https://github.com/shadcn.png",
     nSocio: "004",
     type: "Socio",
     phone: "945678901",
@@ -123,14 +129,15 @@ const data: Socio[] = [
     whatsapp: true,
     status: "active",
     joiaPaid: true,
-    quotaPaid: { "2023": true, "2024": true },
+    quotaPaid: {"2023": true, "2024": true},
     birthdate: new Date("1985-07-25"),
     memberSince: new Date("2018-08-12"),
     email: "Silas22@example.com",
   },
   {
     id: "bhqecj4p",
-    name: "Carmella",
+    name: "Carmella Maria Silva",
+    avatar: "",
     nSocio: "005",
     type: "Socio",
     phone: "956789012",
@@ -138,7 +145,7 @@ const data: Socio[] = [
     whatsapp: false,
     status: "inactive",
     joiaPaid: false,
-    quotaPaid: { "2023": true, "2024": false },
+    quotaPaid: {"2023": true, "2024": false},
     birthdate: new Date("1995-03-18"),
     memberSince: new Date("2020-01-22"),
     email: "carmella@example.com",
@@ -146,6 +153,7 @@ const data: Socio[] = [
   {
     id: "xj4lt9z6",
     name: "Domenic",
+    avatar: " ",
     nSocio: "006",
     type: "Socio",
     phone: "967890123",
@@ -153,7 +161,7 @@ const data: Socio[] = [
     whatsapp: true,
     status: "active",
     joiaPaid: true,
-    quotaPaid: { "2023": true, "2024": true },
+    quotaPaid: {"2023": true, "2024": true},
     birthdate: new Date("1978-11-02"),
     memberSince: new Date("2008-04-17"),
     email: "domenic@example.com",
@@ -161,6 +169,7 @@ const data: Socio[] = [
   {
     id: "p2v3n8qj",
     name: "Eleanora",
+    avatar: " ",
     nSocio: "007",
     type: "Socio",
     phone: "978901234",
@@ -168,14 +177,15 @@ const data: Socio[] = [
     whatsapp: false,
     status: "active",
     joiaPaid: true,
-    quotaPaid: { "2023": false, "2024": true },
+    quotaPaid: {"2023": false, "2024": true},
     birthdate: new Date("1988-04-09"),
     memberSince: new Date("2011-09-30"),
     email: "eleanora@example.com",
   },
   {
     id: "9w0z7yxl",
-    name: "Ferdinand",
+    name: "Ferdinand Costa",
+    avatar: "",
     nSocio: "008",
     type: "Socio",
     phone: "989012345",
@@ -183,7 +193,7 @@ const data: Socio[] = [
     whatsapp: true,
     status: "inactive",
     joiaPaid: false,
-    quotaPaid: { "2023": false, "2024": false },
+    quotaPaid: {"2023": false, "2024": false},
     birthdate: new Date("1992-06-14"),
     memberSince: new Date("2016-05-08"),
     email: "ferdinand@example.com",
@@ -191,6 +201,7 @@ const data: Socio[] = [
   {
     id: "q8r5t2vs",
     name: "Giselle",
+    avatar: "https://github.com/shadcn.png",
     nSocio: "009",
     type: "Socio",
     phone: "990123456",
@@ -198,7 +209,7 @@ const data: Socio[] = [
     whatsapp: false,
     status: "active",
     joiaPaid: true,
-    quotaPaid: { "2023": true, "2024": false },
+    quotaPaid: {"2023": true, "2024": false},
     birthdate: new Date("1983-02-27"),
     memberSince: new Date("2009-12-03"),
     email: "giselle@example.com",
@@ -206,6 +217,7 @@ const data: Socio[] = [
   {
     id: "t4u6v1bw",
     name: "Harrison",
+    avatar: " ",
     nSocio: "010",
     type: "Socio",
     phone: "901234567",
@@ -213,14 +225,15 @@ const data: Socio[] = [
     whatsapp: true,
     status: "active",
     joiaPaid: true,
-    quotaPaid: { "2023": true, "2024": true },
+    quotaPaid: {"2023": true, "2024": true},
     birthdate: new Date("1972-10-19"),
     memberSince: new Date("2005-07-29"),
     email: "harrison@example.com",
   },
   {
     id: "z3a9b8cn",
-    name: "Isadora",
+    name: "Isadora Mendes",
+    avatar: "",
     nSocio: "011",
     type: "Socio",
     phone: "912345679",
@@ -228,14 +241,15 @@ const data: Socio[] = [
     whatsapp: false,
     status: "inactive",
     joiaPaid: false,
-    quotaPaid: { "2023": false, "2024": false },
+    quotaPaid: {"2023": false, "2024": false},
     birthdate: new Date("1998-08-23"),
     memberSince: new Date("2021-03-11"),
     email: "isadora@example.com",
   },
   {
     id: "c7d2e5f0",
-    name: "Jethro",
+    name: "Jethro Silva",
+    avatar: " ",
     nSocio: "012",
     type: "Socio",
     phone: "923456780",
@@ -243,14 +257,15 @@ const data: Socio[] = [
     whatsapp: true,
     status: "active",
     joiaPaid: true,
-    quotaPaid: { "2023": true, "2024": true },
+    quotaPaid: {"2023": true, "2024": true},
     birthdate: new Date("1986-01-05"),
     memberSince: new Date("2013-10-21"),
     email: "jethro@example.com",
   },
   {
     id: "f1g4h7j2",
-    name: "Katerina",
+    name: "Katerina Sousa",
+    avatar: " ",
     nSocio: "013",
     type: "Socio",
     phone: "934567891",
@@ -258,12 +273,12 @@ const data: Socio[] = [
     whatsapp: false,
     status: "active",
     joiaPaid: true,
-    quotaPaid: { "2023": false, "2024": true },
+    quotaPaid: {"2023": false, "2024": true},
     birthdate: new Date("1991-09-12"),
     memberSince: new Date("2014-02-14"),
     email: "katerina@example.com",
-  }
-]
+  },
+];
 
 export const columns: ColumnDef<Socio>[] = [
   {
@@ -301,7 +316,21 @@ export const columns: ColumnDef<Socio>[] = [
         </Button>
       );
     },
-    cell: ({row}) => <div className="capitalize">{row.getValue("name")}</div>,
+    cell: ({row}) => {
+        const nameParts = row.original.name.split(" ");
+        const initials = nameParts.length > 1 
+          ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
+          : nameParts[0][0].toUpperCase();
+      return (
+      <div className="capitalize flex flex-row items-center gap-2">
+        <Avatar>
+          <AvatarImage src={row.original.avatar} />
+          <AvatarFallback>{initials}</AvatarFallback>
+        </Avatar>
+        {row.getValue("name")}
+      </div>
+      );
+    },
   },
   {
     accessorKey: "nSocio",
@@ -351,11 +380,11 @@ export const columns: ColumnDef<Socio>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row, table }) => {
-      const member = row.original
+    cell: ({row, table}) => {
+      const member = row.original;
       const openDetails = (
-        table.options.meta as { openDetails: (member: Socio) => void }
-      ).openDetails
+        table.options.meta as {openDetails: (member: Socio) => void}
+      ).openDetails;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -367,8 +396,7 @@ export const columns: ColumnDef<Socio>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem
-              onSelect={(e) => {
-                e.preventDefault();
+              onSelect={() => {
                 openDetails(member);
               }}
             >
