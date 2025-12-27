@@ -12,7 +12,8 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
+  UsersRound,
+} from "lucide-react";
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
@@ -51,6 +52,11 @@ const data = {
     },
   ],
   navMain: [
+    {
+      title: "Sócios",
+      url: "/socios",
+      icon: UsersRound,
+    },
     {
       title: "Playground",
       url: "#",
@@ -154,7 +160,7 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
